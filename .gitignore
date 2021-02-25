@@ -156,3 +156,4 @@ dmypy.json
 # Virtual env
 venv
 .vscode
+mail.html

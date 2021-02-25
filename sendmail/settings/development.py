@@ -1,6 +1,11 @@
+# python manage.py runserver --settings=sendmail.settings.development
+
 from .base import *
 
 
+INSTALLED_APPS += [
+    "sendemail.apps.SendemailConfig"
+]
 
 ALLOWED_HOSTS = []
 
@@ -29,6 +34,16 @@ DATABASES = {
 }
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny', 
+    )
+}
+
+# Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -42,7 +57,7 @@ EMAIL_USE_TLS = True
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC+5:30'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 

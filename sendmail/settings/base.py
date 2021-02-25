@@ -7,7 +7,6 @@ DEBUG = config('DEBUG')
 BASE_DIR = BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
-print(config('SECRET_KEY'))
 
 INSTALLED_APPS = [
     'django.contrib.admin',
