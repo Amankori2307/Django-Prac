@@ -74,17 +74,29 @@ def mailTemplate(name):
     return html_message
 
 class SendEmail(views.APIView):
-    
     def post(self, request):
-        reqData = request.data
+        try:
 
-        html_message = mailTemplate("Aman Kori")
-        message = reqData["message"]
-        subject = reqData["subject"]
-        recipient_list = reqData["recipient_list"]
-        from_email = settings.EMAIL_HOST_USER 
-        send_mail(message=message, recipient_list=recipient_list, from_email=from_email, subject=subject, html_message=html_message)
+            reqData = request.data
 
-        return Response({
-            "message": "Sent Successfully"
-        }, status=status.HTTP_200_OK)
+            html_message = mailTemplate("Aman Kori")
+            message = reqData["message"]
+            subject = reqData["subject"]
+            recipient_list = reqData["recipient_list"]
+            from_email = settings.EMAIL_HOST_USER 
+            send_mail(message=message, recipient_list=recipient_list, from_email=from_email, subject=subject, html_message=html_message)
+
+            return Response({
+                "message": "Sent Successfully"
+            }, status=status.HTTP_200_OK)
+        except:
+            return Response(
+                {
+                    "error":True,
+                    "success": False,
+                    "message": "Something Went Wrong",
+                    "data": {}
+                }
+            )
+
+

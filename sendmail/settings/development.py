@@ -4,7 +4,13 @@ from .base import *
 
 
 INSTALLED_APPS += [
-    "sendemail.apps.SendemailConfig"
+    "rest_framework",
+    "rest_framework.authtoken",
+    "sendemail.apps.SendemailConfig",
+    'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
+    'drf_yasg',
+    'testfunc.apps.TestfuncConfig',
+    'djoser'
 ]
 
 ALLOWED_HOSTS = []
@@ -42,6 +48,20 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny', 
     )
 }
+# Swagger Settings
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        },
+        'Basic': {
+            'type': 'basic'
+        }
+    }
+}
+
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
