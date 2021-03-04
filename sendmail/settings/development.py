@@ -4,7 +4,8 @@ from .base import *
 
 
 INSTALLED_APPS += [
-    "sendemail.apps.SendemailConfig"
+    "sendemail.apps.SendemailConfig",
+    "htmltopdf.apps.HtmltopdfConfig"
 ]
 
 ALLOWED_HOSTS = []
