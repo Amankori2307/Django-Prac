@@ -33,6 +33,10 @@ ROOT_URLCONF = 'sendmail.urls'
 WSGI_APPLICATION = 'sendmail.wsgi.application'
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    '/var/www/static/',
+]
 
 
 LANGUAGE_CODE = 'en-us'

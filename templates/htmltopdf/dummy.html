@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HTML 2 PDF</title>
+        {% load static %}
+    <style>
+        @page {
+            /* 
+                a0 .. a6
+                b0 .. b6
+                elevenseventeen
+                legal
+                letter
+            */
+            /* 
+                And <orientation> is one of:
+                landscape
+                portrait
+             */
+            size: a6 portrait; 
+            background: url({{logo_url}}) no-repeat center center fixed;
+            @frame header_frame {           /* Static Frame */
+                -pdf-frame-content: header_content;
+                left: 10pt; 
+                right: 10pt; 
+                top: 10pt; 
+                height: 20pt;
+                {% comment %} -pdf-frame-border: 1;    /* for debugging the layout */ {% endcomment %}
+            }
+            @frame content_frame {          /* Content Frame */
+                left: 10pt; 
+                right: 10pt; 
+                top: 30pt; 
+                bottom: 30pt;
+                {% comment %} -pdf-frame-border: 1;    /* for debugging the layout */ {% endcomment %}
+            }
+            @frame footer_frame {           /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 10pt; 
+                right: 10pt; 
+                bottom: 10pt; 
+                height: 20pt;
+                {% comment %} -pdf-frame-border: 1;    /* for debugging the layout */ {% endcomment %}
+            }
+        }
+        #storename{
+            font-size: 40px;
+            font-weight: bold;
+        }
+        #header_content{
+            font-weight: bold;
+            text-align: right;
+        }
+        #footer_content{
+            text-align:center;
+            font-weight:bold
+        }
+    </style>
+</head>
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content"> Page - <pdf:pagenumber>
+    </div>
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content">
+        {{brand_name}} &copy; {{from_year}}-{{to_year}} 
+    </div>
+    <p>
+        {{message}}
+    </p>
+    <!-- <img src={{logo_url}} alt="Logo" class="logo"> -->
+</body>
+</html>
